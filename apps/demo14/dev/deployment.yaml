@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo14
+  namespace: demo14
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo14
+  template:
+    metadata:
+      labels:
+        app: demo14
+    spec:
+      containers:
+        - name: demo14
+          image: 490529426410.dkr.ecr.us-east-1.amazonaws.com/demo14:pending
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
