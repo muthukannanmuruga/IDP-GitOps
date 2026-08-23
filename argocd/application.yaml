@@ -25,7 +25,7 @@ spec:
         targetRevision: main
         path: 'apps/{{.name}}/{{.environment}}'
       destination:
-        name: '{{.cluster}}'
+        server: https://kubernetes.default.svc
         namespace: '{{.namespace}}'
       syncPolicy:
         automated:
