@@ -1,4 +1,4 @@
 name: demo11
 environment: dev
 cluster: idp-dev-eks
-namespace: demo
+namespace: demo11
