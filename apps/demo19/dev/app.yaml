@@ -1,0 +1,4 @@
+name: demo19
+environment: dev
+cluster: idp-dev-eks
+namespace: demo19
