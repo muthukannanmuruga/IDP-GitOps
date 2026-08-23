@@ -1,0 +1,4 @@
+name: demo14
+environment: dev
+cluster: idp-dev-eks
+namespace: demo14
