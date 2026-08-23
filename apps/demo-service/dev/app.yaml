@@ -1,0 +1,4 @@
+name: demo-service
+environment: dev
+cluster: idp-dev-eks
+namespace: demo

@@ -1,20 +1,35 @@
 apiVersion: argoproj.io/v1alpha1
-kind: Application
+kind: ApplicationSet
 metadata:
-  name: demo-service
+  name: idp-applications
   namespace: argocd
 spec:
-  project: default
-  source:
-    repoURL: https://github.com/muthukannanmuruga/IDP-GitOps.git
-    targetRevision: main
-    path: apps/demo-service
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: demo
-  syncPolicy:
-    automated:
-      prune: true
-      selfHeal: true
-    syncOptions:
-      - CreateNamespace=true
+  goTemplate: true
+  generators:
+    - git:
+        repoURL: https://github.com/muthukannanmuruga/IDP-GitOps.git
+        revision: main
+        files:
+          - path: apps/*/*/app.yaml
+  template:
+    metadata:
+      name: '{{.name}}-{{.environment}}'
+      namespace: argocd
+      labels:
+        idp.application: '{{.name}}'
+        idp.environment: '{{.environment}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/muthukannanmuruga/IDP-GitOps.git
+        targetRevision: main
+        path: 'apps/{{.name}}/{{.environment}}'
+      destination:
+        name: '{{.cluster}}'
+        namespace: '{{.namespace}}'
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - CreateNamespace=true
