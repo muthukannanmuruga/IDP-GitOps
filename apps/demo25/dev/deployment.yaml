@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo25
+  namespace: demo25
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo25
+  template:
+    metadata:
+      labels:
+        app: demo25
+    spec:
+      containers:
+        - name: demo25
+          image: 490529426410.dkr.ecr.us-east-1.amazonaws.com/demo25:b3544457f3d2ec273f341f40fd141092c9d50226
+          ports:
+            - containerPort: 8080
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
