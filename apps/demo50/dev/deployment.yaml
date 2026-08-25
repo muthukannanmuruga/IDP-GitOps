@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: demo50
+  namespace: demo50
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: demo50
+  template:
+    metadata:
+      labels:
+        app: demo50
+    spec:
+      containers:
+        - name: demo50
+          image: 490529426410.dkr.ecr.us-east-1.amazonaws.com/demo50:47e892549e269cadef6c08bf08c5cce2efd9b16f
+          ports:
+            - containerPort: 8080
+          env:
+            - name: OTEL_SERVICE_NAME
+              value: "demo50"
+            - name: OTEL_EXPORTER_OTLP_ENDPOINT
+              value: "http://otel-collector.monitoring.svc.cluster.local:4317"
+            - name: OTEL_EXPORTER_OTLP_PROTOCOL
+              value: "grpc"
+            - name: OTEL_METRICS_EXPORTER
+              value: "otlp"
+            - name: OTEL_TRACES_EXPORTER
+              value: "none"
+            - name: OTEL_LOGS_EXPORTER
+              value: "none"
+            - name: OTEL_RESOURCE_ATTRIBUTES
+              value: "service.version=47e892549e269cadef6c08bf08c5cce2efd9b16f,deployment.environment=dev"
+          resources:
+            requests:
+              cpu: 500m
+              memory: 512Mi
+            limits:
+              cpu: 500m
+              memory: 512Mi
