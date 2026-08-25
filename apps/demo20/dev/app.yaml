@@ -1,4 +1,0 @@
-name: demo20
-environment: dev
-cluster: idp-dev-eks
-namespace: demo20
