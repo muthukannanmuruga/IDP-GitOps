@@ -1,0 +1,4 @@
+name: demo45
+environment: dev
+cluster: idp-dev-eks
+namespace: demo45
